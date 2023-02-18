@@ -55,4 +55,9 @@ public class Unit_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
         unit_reference.UnitClicked();
         
     }
+
+    public void OnNotifyParams(NotifyAction notifyAction, Dictionary<string, object> notifyParams)
+    {
+        return;
+    }
 }

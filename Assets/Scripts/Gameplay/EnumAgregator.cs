@@ -9,7 +9,12 @@ public enum FactionName
     Alumi,
     Riven
 }
-public enum WeaponName
+public enum SkillType
+{
+    Weapon,
+    Spell
+}
+public enum SkillName
 {
     Axe,
     Sword,
@@ -46,7 +51,11 @@ public enum NotifyAction
     HoverIn,
     HoverOut,
     Select,
-    Deselect
+    Deselect,
+    SkillHoverIn,
+    SkillHoverOut,
+    SkillSelect,
+    SkillDeselect
 }
 public enum Row
 {

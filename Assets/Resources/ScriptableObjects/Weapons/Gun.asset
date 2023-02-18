@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e126086c88c15f438c907e3bd38c219, type: 3}
+  m_Script: {fileID: 11500000, guid: 646c4d4fb8310ac4e8b573a4f6a8e4d9, type: 3}
   m_Name: Gun
   m_EditorClassIdentifier: 
-  weapon_name: 3
+  skillName: Gun
+  skillType: 0
   range: 1
   aim: 1
   splash: 2
   damageType: 0
-  base_damage: 55
-  selectionMenuIcon: {fileID: 21300000, guid: ae590d61dde45b34f85b63eb185d6387, type: 3}
+  base_damage: 50
+  menuIcon: {fileID: 21300000, guid: ae590d61dde45b34f85b63eb185d6387, type: 3}

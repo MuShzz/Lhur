@@ -14,4 +14,8 @@ public abstract class Subject : NetworkBehaviour
     {
         observers.ForEach((observer) => { observer.OnNotify(notifyAction); });
     }
+    protected void NotifyObservers(NotifyAction notifyAction, Dictionary<string, object> notifyParams)
+    {
+        observers.ForEach((observer) => { observer.OnNotifyParams(notifyAction, notifyParams); });
+    }
 }

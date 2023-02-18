@@ -7,7 +7,7 @@ using UnityEngine.TextCore.Text;
 public class ListsManager : MonoBehaviour
 {
     public static ListsManager listManager = null;
-    public static List<Weapon> weaponsList = new List<Weapon>();
+    public static List<SkillSO> weaponsList = new List<SkillSO>();
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +23,11 @@ public class ListsManager : MonoBehaviour
             //wp.Print();
         }
         */
-        Object[] objects = Resources.LoadAll("ScriptableObjects/Weapons", typeof(Weapon));
+        Object[] objects = Resources.LoadAll("ScriptableObjects/Weapons", typeof(SkillSO));
 
         foreach (Object obj in objects)
         {
-            weaponsList.Add(obj as Weapon);
+            weaponsList.Add(obj as SkillSO);
         }
         Debug.Log("weaponsList Size: " + objects.Length);
 
