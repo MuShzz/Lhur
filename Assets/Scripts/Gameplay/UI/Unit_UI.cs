@@ -8,11 +8,43 @@ public class Unit_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     [SerializeField] GameObject hover_ui;
     [SerializeField] GameObject selected_ui;
     [SerializeField] Unit unit_reference;
+    [SerializeField] Player_UI player_UIReference;
+    [SerializeField] public int row;
+    [SerializeField] public int column;
+
+    public List<Unit_UI> rowUnits       = new List<Unit_UI>();
+    public List<Unit_UI> columnUnits    = new List<Unit_UI>();
+    public List<Unit_UI> adjacentUnits  = new List<Unit_UI>();
+
     // Start is called before the first frame update
     void Start()
     {
         unit_reference = this.gameObject.GetComponent<Unit>();
-        //Debug.Log("unit_reference: " + unit_reference);
+        MapReferences();
+    }
+    private void MapReferences()
+    {
+        foreach(Unit_UI unitUIRef in player_UIReference.ui_units)
+        {
+            if(unitUIRef.row == row)
+            {
+                rowUnits.Add(unitUIRef);
+                if(unitUIRef.column == column+1 || unitUIRef.column == column - 1)
+                {
+                    adjacentUnits.Add(unitUIRef);
+                    Debug.Log("Unit_UI MapReferences | adjacent "+row+" "+column+" --- "+ unitUIRef.row+" "+ unitUIRef.column);
+                }
+            }
+            if (unitUIRef.column == column)
+            {
+                columnUnits.Add(unitUIRef);
+                if (unitUIRef.row == row + 1 || unitUIRef.row == row - 1)
+                {
+                    adjacentUnits.Add(unitUIRef);
+                    Debug.Log("Unit_UI MapReferences | adjacent " + row + " " + column + " --- " + unitUIRef.row + " " + unitUIRef.column);
+                }
+            }
+        }
     }
     private void OnEnable()
     {
