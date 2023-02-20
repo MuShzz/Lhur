@@ -55,33 +55,36 @@ public class Unit : Subject
     {
         if (this.player_reference.selectedUnit == this)
         {
-            if (IsOwner) this.player_reference.SetSelectedUnit(null);
-
+            this.player_reference.SetSelectedUnit(null);
             this.NotifyObservers(NotifyAction.Deselect);
         }
         else
         {
-            if (IsOwner) this.player_reference.SetSelectedUnit(this);
-
+            this.player_reference.SetSelectedUnit(this);
             this.NotifyObservers(NotifyAction.Select);
+        }
+
+        if (!IsOwner) { return; }
+
+        //Local only behaviour
+        if (this.player_reference.selectedUnit != this)
+        {
+            Debug.Log("Unit.UnitClicked | Refreshing MenuUI with NULL");
+            this.player_reference.RefreshMenuUI(null);
+        }
+        else
+        {
+            Debug.Log("Unit.UnitClicked | Refreshing MenuUI with skills " + skills.Count);
+            this.player_reference.RefreshMenuUI(skills);
         }
     }
     #endregion Network
 
     public void UnitClicked()
     {
-        if(IsOwner) SubmitSelectUnitServerRpc();
-
-        //Local only behaviour
-        if (this.player_reference.selectedUnit != this)
-        {
-            Debug.Log("Refreshing MenuUI with NULL");
-            this.player_reference.RefreshMenuUI(null);
-        }
-        else
-        {
-            Debug.Log("Refreshing MenuUI with skills "+ skills.Count);
-            this.player_reference.RefreshMenuUI(skills);
+        if (IsOwner) {
+            SubmitSelectUnitServerRpc();
+            
         }
     }
     public void PlayerDeselectUnit() { this.NotifyObservers(NotifyAction.Deselect); }
