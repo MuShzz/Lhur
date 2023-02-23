@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Unit_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IObserver
 {
-    [SerializeField] GameObject hover_ui;
+    [SerializeField] public GameObject hover_ui;
     [SerializeField] GameObject selected_ui;
     [SerializeField] Unit unit_reference;
-    [SerializeField] Player_UI player_UIReference;
+    [SerializeField] public Player_UI player_UIReference;
     [SerializeField] public int row;
     [SerializeField] public int column;
 
     public List<Unit_UI> rowUnits       = new List<Unit_UI>();
     public List<Unit_UI> columnUnits    = new List<Unit_UI>();
     public List<Unit_UI> adjacentUnits  = new List<Unit_UI>();
+    public List<Unit_UI> frontUnits     = new List<Unit_UI>();
 
     // Start is called before the first frame update
     void Start()
@@ -62,12 +64,12 @@ public class Unit_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        
+        unit_reference.UnitHoverEnter();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        
+        unit_reference.UnitHoverExit();
     }
 
     public void OnNotify(NotifyAction notifyAction)
@@ -91,5 +93,48 @@ public class Unit_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     public void OnNotifyParams(NotifyAction notifyAction, Dictionary<string, object> notifyParams)
     {
         return;
+    }
+
+    public List<Unit_UI> TargetUnitsUI(Aim aim, Splash splash) 
+    {
+        List<Unit_UI> unitsUI = new List<Unit_UI>();
+        switch (aim)
+        {
+            case Aim.Single:
+                hover_ui.SetActive(true);
+                break;
+            case Aim.All:
+                foreach (Unit_UI unitUIRef in player_UIReference.ui_units)
+                {
+                    unitsUI.Add(unitUIRef);
+                }
+                break;
+            case Aim.Column or Aim.RowColumn:
+                foreach (Unit_UI unitUIRef in columnUnits)
+                {
+                    if(splash == Splash.Adjacent && adjacentUnits.Contains(unitUIRef)) {
+                        unitsUI.Add(unitUIRef);
+                    }
+                    else if(splash == Splash.All)
+                    {
+                        unitsUI.Add(unitUIRef);
+                    }
+                }
+                break;
+            case Aim.Row or Aim.RowColumn:
+                foreach (Unit_UI unitUIRef in rowUnits)
+                {
+                    if (splash == Splash.Adjacent && adjacentUnits.Contains(unitUIRef))
+                    {
+                        unitsUI.Add(unitUIRef);
+                    }
+                    else if(splash == Splash.All)
+                    {
+                        unitsUI.Add(unitUIRef);
+                    }
+                }
+                break;
+        }
+        return unitsUI;
     }
 }

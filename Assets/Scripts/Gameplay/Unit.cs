@@ -8,7 +8,7 @@ public class Unit : Subject
 {
     [SerializeField] SkillSO weaponSO;
 
-    public PlayerS player_reference;
+    public PlayerS playerReference;
     public Skill weapon;
     public List<Skill> skills;
 
@@ -50,32 +50,53 @@ public class Unit : Subject
     {
         SubmitSelectUnitClientRpc();
     }
+
     [ClientRpc]
     void SubmitSelectUnitClientRpc()
     {
-        if (this.player_reference.selectedUnit == this)
+        if (this.playerReference.selectedUnit == this)
         {
-            this.player_reference.SetSelectedUnit(null);
+            this.playerReference.SetSelectedUnit(null);
             this.NotifyObservers(NotifyAction.Deselect);
         }
         else
         {
-            this.player_reference.SetSelectedUnit(this);
+            this.playerReference.SetSelectedUnit(this);
             this.NotifyObservers(NotifyAction.Select);
         }
 
         if (!IsOwner) { return; }
 
         //Local only behaviour
-        if (this.player_reference.selectedUnit != this)
+        if (this.playerReference.selectedUnit != this)
         {
             Debug.Log("Unit.UnitClicked | Refreshing MenuUI with NULL");
-            this.player_reference.RefreshMenuUI(null);
+            this.playerReference.RefreshMenuUI(null);
         }
         else
         {
             Debug.Log("Unit.UnitClicked | Refreshing MenuUI with skills " + skills.Count);
-            this.player_reference.RefreshMenuUI(skills);
+            this.playerReference.RefreshMenuUI(skills);
+        }
+    }
+ 
+    [ServerRpc(RequireOwnership = false)]
+    void SubmitUnitHoverServerRPC(Boolean enter, Aim aim, Splash splash)
+    {
+        SubmitUnitHoverClientRPC(enter, aim, splash);
+    }
+    [ClientRpc]
+    void SubmitUnitHoverClientRPC(Boolean enter, Aim aim, Splash splash)
+    {
+        Debug.Log("Unit SubmitUnitHoverClientRPC | "+enter+" "+aim+" "+splash);
+        Unit_UI unitUI = this.gameObject.GetComponent<Unit_UI>();
+        if (enter)
+        {
+            unitUI.player_UIReference.ShowTargets(unitUI, aim, splash);
+        }
+        else
+        {
+            unitUI.player_UIReference.HideTargets();
         }
     }
     #endregion Network
@@ -84,8 +105,37 @@ public class Unit : Subject
     {
         if (IsOwner) {
             SubmitSelectUnitServerRpc();
-            
         }
+    }
+    public void UnitHoverEnter()
+    {
+        PlayerS myPlayer = GameTurnManager.instance.myPlayer;
+        Debug.Log("Unit UnitHoverEnter | ENTERING HOVER");
+        if(myPlayer.selectedUnit == null){
+            Debug.Log("Unit UnitHoverEnter | ENTERING HOVER - myPlayer.selectedUnit NULL");
+            return;
+        }
+        if (myPlayer.selectedSkill == null)
+        {
+            Debug.Log("Unit UnitHoverEnter | ENTERING HOVER - myPlayer.selectedSkill NULL");
+            return;
+        }
+        if (!myPlayer.selectedUnit.skills.Contains(myPlayer.selectedSkill)){
+            Debug.Log("Unit UnitHoverEnter | ENTERING HOVER - !myPlayer.selectedUnit.skills.Contains(myPlayer.selectedSkill)");
+            return; 
+        }
+        if(column != Column.Front && myPlayer.selectedSkill.skillSO.range == Range.Melee)
+        {
+            Debug.Log("Unit UnitHoverEnter | ENTERING HOVER - Melee Skill)");
+            return;
+        }
+
+        SubmitUnitHoverServerRPC(true, playerReference.selectedSkill.skillSO.aim, playerReference.selectedSkill.skillSO.splash);
+    }
+    public void UnitHoverExit()
+    {
+        Debug.Log("Unit UnitHoverExit | EXITING HOVER");
+        SubmitUnitHoverServerRPC(false, Aim.Single, Splash.Single);
     }
     public void PlayerDeselectUnit() { this.NotifyObservers(NotifyAction.Deselect); }
     public void Hover() {

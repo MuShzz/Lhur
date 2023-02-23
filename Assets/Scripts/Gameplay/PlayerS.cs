@@ -12,7 +12,8 @@ public class PlayerS : Subject
     [SerializeField] RectTransform playerParentTranform;
     [SerializeField] RectTransform playerInfo;
     [SerializeField] List<Skill> playerSkills = new List<Skill>();
-    
+    [SerializeField] public Player_UI playerUI;
+
 
     public Unit selectedUnit = null;
     public Skill selectedSkill = null;
@@ -21,12 +22,18 @@ public class PlayerS : Subject
     void Start()
     {
         SetPlayerPositions();
+        SetPlayersOnTurnManager();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void SetPlayersOnTurnManager()
+    {
+        if (IsOwner) { GameTurnManager.instance.myPlayer = this; }
+        else { GameTurnManager.instance.enemyPlayer = this; }
     }
     public void SetSelectedUnit(Unit selectedUnit)
     {
@@ -40,7 +47,10 @@ public class PlayerS : Subject
     #region Skills
     public void SkillClicked(Skill skill_reference, Skill_UI skillUI)
     {
-        if (IsOwner) selectedSkill = skill_reference;
+        Debug.Log("PlayerS SkillClicked | " + IsOwner+" "+ skill_reference);
+        if (IsOwner) {
+            selectedSkill = skill_reference; 
+        }
 
         Dictionary<string, object> notifyParams = new Dictionary<string, object>();
         notifyParams.Add("skillUI", skillUI);
@@ -49,14 +59,14 @@ public class PlayerS : Subject
     public void RefreshMenuUI(List<Skill> skills){
         Dictionary<string,object> notifyParams = new Dictionary<string, object>();
         //Debug.Log("skills Count"+ skills.Count);
-        if (skills == null) skills = this.playerSkills;
+        if (skills == null) { skills = this.playerSkills; }
 
-        Debug.Log("PlayerS RefreshMenuUI skillsCount"+ skills.Count);
+        Debug.Log("PlayerS RefreshMenuUI | skillsCount"+ skills.Count);
         notifyParams.Add("skills",skills);
 
         object skillsObj = notifyParams["skills"];
         List<Skill> skillsT = (List<Skill>)skillsObj;
-        Debug.Log("skillsT - "+ skillsT.Count);
+        Debug.Log("PlayerS RefreshMenuUI | skillsT - " + skillsT.Count);
         NotifyObservers(NotifyAction.Select, notifyParams);
     }
     #endregion

@@ -17,7 +17,7 @@ public class Skill_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // Start is called before the first frame update
     void Start()
     {
-        if(selected) selected_ui.SetActive(true);
+        if (selected) { selected_ui.SetActive(true); }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -41,6 +41,7 @@ public class Skill_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             RectTransform skillRect = gameObject.GetComponent<RectTransform>();
             skillRect.sizeDelta = new Vector2(skillRect.sizeDelta.x + 50, skillRect.sizeDelta.y + 50);
+            player_reference.selectedSkill = skill_reference;
         }
         selected = true;
     }

@@ -37,6 +37,7 @@ public class SkillMenu_UI : MonoBehaviour, IObserver
                     if(skill != null){
                         Debug.Log("SkillMenu_UI.OnNotifyParams | Skill is not null");
                         skillUIs[i].gameObject.SetActive(true);
+                        skillUIs[i].skill_reference = skill;
                         skillUIs[i].skillImage.gameObject.GetComponent<Image>().sprite = skill.skillSO.menuIcon;
                         if (i == 0) { skillUIs[i].SelectSkill(); }
                         else { skillUIs[i].UnSelectSkill(); }
@@ -68,6 +69,10 @@ public class SkillMenu_UI : MonoBehaviour, IObserver
         }
     }
 
+    public void UnSelectAll()
+    {
+        foreach(Skill_UI su in skillUIs){ su.UnSelectSkill(); }
+    }
     // Update is called once per frame
     void Update()
     {

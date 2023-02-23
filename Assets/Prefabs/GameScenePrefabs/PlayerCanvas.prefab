@@ -532,6 +532,7 @@ MonoBehaviour:
   rowUnits: []
   columnUnits: []
   adjacentUnits: []
+  frontUnits: []
 --- !u!114 &114137705852787850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,7 +546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 11400000, guid: 872782a847f710a4c99ab81a790abc93, type: 2}
-  player_reference: {fileID: 207925234779858420}
+  playerReference: {fileID: 207925234779858420}
   weapon: {fileID: 0}
   skills: []
   unit_seed: 0
@@ -690,6 +691,7 @@ MonoBehaviour:
   rowUnits: []
   columnUnits: []
   adjacentUnits: []
+  frontUnits: []
 --- !u!114 &114137706099829500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -703,7 +705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 11400000, guid: b78f7826baf4bd94fbab60ed067b3b7d, type: 2}
-  player_reference: {fileID: 207925234779858420}
+  playerReference: {fileID: 207925234779858420}
   weapon: {fileID: 0}
   skills: []
   unit_seed: 0
@@ -772,6 +774,7 @@ MonoBehaviour:
   rowUnits: []
   columnUnits: []
   adjacentUnits: []
+  frontUnits: []
 --- !u!114 &114137706103597426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,7 +788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 11400000, guid: 49ee8889657fc4744aad9d71d2bcb3ec, type: 2}
-  player_reference: {fileID: 207925234779858420}
+  playerReference: {fileID: 207925234779858420}
   weapon: {fileID: 0}
   skills: []
   unit_seed: 0
@@ -969,6 +972,7 @@ MonoBehaviour:
   rowUnits: []
   columnUnits: []
   adjacentUnits: []
+  frontUnits: []
 --- !u!114 &114137706296305231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -982,7 +986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 11400000, guid: 44b23764e37ddbf49ab2f6da67d55d43, type: 2}
-  player_reference: {fileID: 207925234779858420}
+  playerReference: {fileID: 207925234779858420}
   weapon: {fileID: 0}
   skills: []
   unit_seed: 0
@@ -2336,7 +2340,6 @@ RectTransform:
   m_Children:
   - {fileID: 114137706331554434}
   - {fileID: 114137705921018682}
-  - {fileID: 2075732274964464866}
   m_Father: {fileID: 114137707458419104}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3427,6 +3430,7 @@ MonoBehaviour:
   playerParentTranform: {fileID: 4885294670698257594}
   playerInfo: {fileID: 207925234419498162}
   playerSkills: []
+  playerUI: {fileID: 2405772908310636604}
   selectedUnit: {fileID: 0}
   selectedSkill: {fileID: 0}
 --- !u!114 &207925234779858419
@@ -3462,6 +3466,7 @@ MonoBehaviour:
   - {fileID: 114137705852787849}
   - {fileID: 114137706103597425}
   - {fileID: 114137706099829499}
+  skillMenuUI: {fileID: 147635944837733549}
 --- !u!1 &207925234936175444
 GameObject:
   m_ObjectHideFlags: 0
@@ -4377,7 +4382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 0}
-  player_reference: {fileID: 0}
+  playerReference: {fileID: 0}
   weapon: {fileID: 0}
   skills: []
   unit_seed: 0
@@ -5001,82 +5006,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
---- !u!1 &962725755304970282
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2075732274964464866}
-  - component: {fileID: 5615569652226457751}
-  - component: {fileID: 8327563527843110252}
-  m_Layer: 5
-  m_Name: TargetHover (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2075732274964464866
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962725755304970282}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7.5197372}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 114137707330878714}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 60.20999}
-  m_SizeDelta: {x: 348.65, y: 120.42}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &5615569652226457751
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962725755304970282}
-  m_CullTransparentMesh: 1
---- !u!114 &8327563527843110252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962725755304970282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 63f17b1a0b59c4f49bc605873d683c1f, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &994242758753627198
 GameObject:
   m_ObjectHideFlags: 0
@@ -5939,7 +5868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 0}
-  player_reference: {fileID: 0}
+  playerReference: {fileID: 0}
   weapon: {fileID: 0}
   skills: []
   unit_seed: 0
@@ -6418,7 +6347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 0}
-  player_reference: {fileID: 0}
+  playerReference: {fileID: 0}
   weapon: {fileID: 0}
   skills: []
   unit_seed: 0
@@ -9585,6 +9514,7 @@ MonoBehaviour:
   - {fileID: 114137705852787849}
   - {fileID: 114137706103597425}
   - {fileID: 114137706099829499}
+  skillMenuUI: {fileID: 0}
 --- !u!1 &4885294671654482522
 GameObject:
   m_ObjectHideFlags: 0
@@ -10567,7 +10497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 0}
-  player_reference: {fileID: 0}
+  playerReference: {fileID: 0}
   weapon: {fileID: 0}
   skills: []
   unit_seed: 0
@@ -11950,7 +11880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 0}
-  player_reference: {fileID: 0}
+  playerReference: {fileID: 0}
   weapon: {fileID: 0}
   skills: []
   unit_seed: 0
@@ -12253,7 +12183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 0}
-  player_reference: {fileID: 0}
+  playerReference: {fileID: 0}
   weapon: {fileID: 0}
   skills: []
   unit_seed: 0
@@ -12616,7 +12546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9205300372488413565
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12801,7 +12731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 0}
-  player_reference: {fileID: 0}
+  playerReference: {fileID: 0}
   weapon: {fileID: 0}
   skills: []
   unit_seed: 0
@@ -12860,7 +12790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSO: {fileID: 0}
-  player_reference: {fileID: 0}
+  playerReference: {fileID: 0}
   weapon: {fileID: 0}
   skills: []
   unit_seed: 0
