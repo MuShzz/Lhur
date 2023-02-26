@@ -76,6 +76,41 @@ public class SkillMenu_UI : MonoBehaviour, IObserver
     // Update is called once per frame
     void Update()
     {
-        
+        ListKeyboard();
     }
+    #region Keyboard
+    private void ListKeyboard()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectSkillPos(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SelectSkillPos(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SelectSkillPos(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            SelectSkillPos(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            SelectSkillPos(4);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            SelectSkillPos(5);
+        }
+    }
+    private void SelectSkillPos(int index) {
+        if(skillUIs[index].skill_reference != null)
+        {
+            skillUIs[index].SkillUIClicked();
+        }
+    }
+    #endregion
 }

@@ -32,6 +32,10 @@ public class Skill_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        SkillUIClicked();
+    }
+    public void SkillUIClicked()
+    {
         player_reference.SkillClicked(skill_reference, this);
     }
     public void SelectSkill()

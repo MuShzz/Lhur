@@ -6,7 +6,7 @@ using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class GameTurnManager : MonoBehaviour
+public class GameTurnManager : NetworkBehaviour
 {
     public static GameTurnManager instance;
     public PlayerS myPlayer;

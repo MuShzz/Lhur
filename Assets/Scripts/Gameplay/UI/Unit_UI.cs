@@ -109,26 +109,39 @@ public class Unit_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
                     unitsUI.Add(unitUIRef);
                 }
                 break;
-            case Aim.Column or Aim.RowColumn:
+            case Aim.Column:
                 foreach (Unit_UI unitUIRef in columnUnits)
                 {
-                    if(splash == Splash.Adjacent && adjacentUnits.Contains(unitUIRef)) {
+                    if (splash == Splash.All || this == unitUIRef) { unitsUI.Add(unitUIRef); }
+                    else if(splash == Splash.Adjacent && adjacentUnits.Contains(unitUIRef)) {
                         unitsUI.Add(unitUIRef);
                     }
-                    else if(splash == Splash.All)
+                    
+                }
+                break;
+            case Aim.Row:
+                foreach (Unit_UI unitUIRef in rowUnits)
+                {
+                    if (splash == Splash.All || this == unitUIRef) { unitsUI.Add(unitUIRef); }
+                    else if (splash == Splash.Adjacent && adjacentUnits.Contains(unitUIRef))
                     {
                         unitsUI.Add(unitUIRef);
                     }
                 }
                 break;
-            case Aim.Row or Aim.RowColumn:
-                foreach (Unit_UI unitUIRef in rowUnits)
+            case Aim.RowColumn:
+                foreach (Unit_UI unitUIRef in columnUnits)
                 {
-                    if (splash == Splash.Adjacent && adjacentUnits.Contains(unitUIRef))
+                    if (splash == Splash.All || this == unitUIRef) { unitsUI.Add(unitUIRef); }
+                    else if (splash == Splash.Adjacent && adjacentUnits.Contains(unitUIRef))
                     {
                         unitsUI.Add(unitUIRef);
                     }
-                    else if(splash == Splash.All)
+                }
+                foreach (Unit_UI unitUIRef in rowUnits)
+                {
+                    if (splash == Splash.All || this == unitUIRef) { unitsUI.Add(unitUIRef); }
+                    else if (splash == Splash.Adjacent && adjacentUnits.Contains(unitUIRef))
                     {
                         unitsUI.Add(unitUIRef);
                     }
