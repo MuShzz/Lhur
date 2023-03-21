@@ -19,4 +19,6 @@ MonoBehaviour:
   splash: 1
   damageType: 0
   base_damage: 55
+  baseCooldown: 0
   menuIcon: {fileID: 21300000, guid: a0b5af9abd9c71a4eb8c947f79a8d085, type: 3}
+  visualEffect: {fileID: 772633280058733949, guid: b1492dd48479c174d88aef7ec0a23c84, type: 3}

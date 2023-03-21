@@ -11,6 +11,8 @@ public class GameTurnManager : NetworkBehaviour
     public static GameTurnManager instance;
     public PlayerS myPlayer;
     public PlayerS enemyPlayer;
+    public NetworkVariable<int> playerTurn;
+    public NetworkVariable<int> playerCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +21,14 @@ public class GameTurnManager : NetworkBehaviour
 
         if (GameStateSingleton.instance == null) return;
 
+        OnlineType onlineType = GameStateSingleton.instance.onlineType;
+        playerCount.Value = 0;
+        if(onlineType == OnlineType.Server || onlineType == OnlineType.Host) { playerTurn.Value = 1;  }
+        
         switch (GameStateSingleton.instance.gameType)
         {
             case GameType.Online:
-                switch (GameStateSingleton.instance.onlineType)
+                switch (onlineType)
                 {
                     case OnlineType.Server:
                         NetworkManager.Singleton.StartServer();
@@ -54,6 +60,16 @@ public class GameTurnManager : NetworkBehaviour
         }
     }
 
+    public void SpawnPlayer(PlayerS pl)
+    {
+        Debug.Log("GameTurnManager SpawnPlayer | STARTING - "+ NetworkManager.Singleton.IsServer);
+        if (NetworkManager.Singleton.IsClient == true) { return; }
+        
+        int playerCount = NetworkManager.Singleton.ConnectedClientsIds.Count;
+        Debug.Log("GameTurnManager SpawnPlayer | " + playerCount);
+        pl.playerNumber.Value = playerCount;
+
+    }
     public void BackAction() { 
     
         if(myPlayer == null){ return; }
@@ -70,6 +86,30 @@ public class GameTurnManager : NetworkBehaviour
             myPlayer.selectedUnit = null;   
         }
     }
+    public void ChangePlayerTurn()
+    {
+        if(!NetworkManager.Singleton.IsServer == false) { return; }
+
+        if (playerTurn.Value == 1)
+        {
+            playerTurn.Value = 2;
+        }
+        else
+        {
+            playerTurn.Value = 1;
+        }
+    }
+    public PlayerS GetPlayer(int playerNumber) { 
+        if(myPlayer.playerNumber.Value == playerNumber)
+        {
+            return myPlayer;
+        }
+        else if (enemyPlayer.playerNumber.Value == playerNumber)
+        {
+            return enemyPlayer;
+        }
+        return null; 
+    }
 
     #region Keyboard
     void OnKeyDown(KeyDownEvent ev)
@@ -82,11 +122,18 @@ public class GameTurnManager : NetworkBehaviour
     }
     void Update()
     {
+        ListenKeyboard();
+
+        if (NetworkManager.Singleton.IsServer == false) { return; }
+        
+    }
+    private void ListenKeyboard()
+    {
         if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("Key DOWN!!! ");
             BackAction();
         }
     }
     #endregion
+
 }

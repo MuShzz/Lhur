@@ -16,6 +16,7 @@ public class SkillSO : ScriptableObject
 
     //UI Section
     public Sprite menuIcon;
+    public GameObject visualEffect;
 
     public SkillSO(SkillSO existingSkill)
     {

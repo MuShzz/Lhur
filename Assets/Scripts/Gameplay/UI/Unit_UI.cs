@@ -8,7 +8,7 @@ public class Unit_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
 {
     [SerializeField] public GameObject hover_ui;
     [SerializeField] GameObject selected_ui;
-    [SerializeField] Unit unit_reference;
+    [SerializeField] public Unit unit_reference;
     [SerializeField] public Player_UI player_UIReference;
     [SerializeField] public int row;
     [SerializeField] public int column;
@@ -34,7 +34,7 @@ public class Unit_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
                 if(unitUIRef.column == column+1 || unitUIRef.column == column - 1)
                 {
                     adjacentUnits.Add(unitUIRef);
-                    Debug.Log("Unit_UI MapReferences | adjacent "+row+" "+column+" --- "+ unitUIRef.row+" "+ unitUIRef.column);
+                    //Debug.Log("Unit_UI MapReferences | adjacent "+row+" "+column+" --- "+ unitUIRef.row+" "+ unitUIRef.column);
                 }
             }
             if (unitUIRef.column == column)
@@ -43,7 +43,7 @@ public class Unit_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
                 if (unitUIRef.row == row + 1 || unitUIRef.row == row - 1)
                 {
                     adjacentUnits.Add(unitUIRef);
-                    Debug.Log("Unit_UI MapReferences | adjacent " + row + " " + column + " --- " + unitUIRef.row + " " + unitUIRef.column);
+                    //Debug.Log("Unit_UI MapReferences | adjacent " + row + " " + column + " --- " + unitUIRef.row + " " + unitUIRef.column);
                 }
             }
         }

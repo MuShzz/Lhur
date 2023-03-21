@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,15 +15,18 @@ public class PlayerS : Subject
     [SerializeField] List<Skill> playerSkills = new List<Skill>();
     [SerializeField] public Player_UI playerUI;
 
-
+    public NetworkVariable<int> playerNumber;
     public Unit selectedUnit = null;
     public Skill selectedSkill = null;
 
     private PlayerPosition playerPos;
     void Start()
     {
+        this.GetComponent<Canvas>().worldCamera= Camera.main;
         SetPlayerPositions();
         SetPlayersOnTurnManager();
+        GameTurnManager.instance.SpawnPlayer(this);
+        Debug.Log("PlayerS Start | playerNumber.Value: " + playerNumber.Value);
     }
 
     // Update is called once per frame
@@ -30,10 +34,15 @@ public class PlayerS : Subject
     {
         
     }
+    
     public void SetPlayersOnTurnManager()
     {
         if (IsOwner) { GameTurnManager.instance.myPlayer = this; }
         else { GameTurnManager.instance.enemyPlayer = this; }
+    }
+    public override void OnNetworkSpawn()
+    {
+        //GameTurnManager.instance.SpawnPlayer(this);
     }
     public void SetSelectedUnit(Unit selectedUnit)
     {
@@ -44,6 +53,18 @@ public class PlayerS : Subject
         this.selectedUnit = selectedUnit;
     }
 
+    public Unit GetUnit(Column column, Row row) 
+    {
+        foreach (Unit_UI unit_ui in playerUI.ui_units)
+        {
+            Unit unit = unit_ui.gameObject.GetComponent<Unit>();
+            if (unit.column == column && unit.row == row)
+            {
+                return unit;
+            }
+        }
+        return null;
+    }
     #region Skills
     public void SkillClicked(Skill skill_reference, Skill_UI skillUI)
     {

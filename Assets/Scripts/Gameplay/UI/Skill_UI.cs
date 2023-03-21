@@ -11,12 +11,16 @@ public class Skill_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public GameObject selected_ui;
     public PlayerS player_reference;
     public Skill skill_reference;
+    public Unit unitReference;
     public Boolean selected = false;
     public GameObject skillImage;
+    public int position;
 
     // Start is called before the first frame update
     void Start()
     {
+        unitReference = this.transform.GetComponent<Unit>();   
+
         if (selected) { selected_ui.SetActive(true); }
     }
 
@@ -37,6 +41,7 @@ public class Skill_UI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void SkillUIClicked()
     {
         player_reference.SkillClicked(skill_reference, this);
+        skill_reference.position = position;
     }
     public void SelectSkill()
     {

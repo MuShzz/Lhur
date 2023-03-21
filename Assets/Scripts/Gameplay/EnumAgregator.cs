@@ -72,3 +72,10 @@ public enum PlayerPosition
     Left,
     Right
 }
+public enum CommandStatus
+{
+    Pending,
+    Executing,
+    Finished,
+    Failed
+}

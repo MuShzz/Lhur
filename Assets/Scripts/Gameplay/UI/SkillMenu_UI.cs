@@ -39,8 +39,7 @@ public class SkillMenu_UI : MonoBehaviour, IObserver
                         skillUIs[i].gameObject.SetActive(true);
                         skillUIs[i].skill_reference = skill;
                         skillUIs[i].skillImage.gameObject.GetComponent<Image>().sprite = skill.skillSO.menuIcon;
-                        if (i == 0) { skillUIs[i].SelectSkill(); }
-                        else { skillUIs[i].UnSelectSkill(); }
+                        skillUIs[i].UnSelectSkill();
                     }
                 }
                 for (int i = skills.Count; i < skillUIs.Length; i++){
@@ -52,12 +51,12 @@ public class SkillMenu_UI : MonoBehaviour, IObserver
                 Skill_UI skillUI = (Skill_UI)notifyParams["skillUI"];
                 //if (skillUI.gameObject.GetComponent<Skill>().IsOwner == false) { return; }
 
-                Debug.Log("SkillMenu_UI.OnNotifyParams | skillUI.name: " + skillUI.name);
+                //Debug.Log("SkillMenu_UI.OnNotifyParams | skillUI.name: " + skillUI.name);
                 foreach(Skill_UI skillLoop in skillUIs) {
-                    Debug.Log("skillLoop.name: " + skillLoop.name);
+                    //Debug.Log("skillLoop.name: " + skillLoop.name);
                     if (skillLoop.name == skillUI.name)
                     {
-                        Debug.Log("SkillMenu_UI.OnNotifyParams | Equals!!!!");
+                        //Debug.Log("SkillMenu_UI.OnNotifyParams | Equals!!!!");
                         skillLoop.SelectSkill();
                     }
                     else
@@ -76,10 +75,10 @@ public class SkillMenu_UI : MonoBehaviour, IObserver
     // Update is called once per frame
     void Update()
     {
-        ListKeyboard();
+        ListenKeyboard();
     }
     #region Keyboard
-    private void ListKeyboard()
+    private void ListenKeyboard()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
